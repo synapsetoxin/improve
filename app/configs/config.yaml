@@ -1,0 +1,10 @@
+discord:
+  bot:
+    token: ODcwMDUxNzMyNjI4MDc4NjYy.GNzolY.i_DjmVrqRq8lTWfLUFKYA3XRbcPEwEIswnnbRU
+  server:
+    channels:
+      statistics:
+        members: null
+        voice: null
+      door: null  # welcome channel
+      create_voice: null
