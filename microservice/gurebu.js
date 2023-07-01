@@ -16,7 +16,7 @@ app.get('/fetch-transactions', (req, res) => {
             .then(response => {
                 const transactions = response.data.data;
                 return transactions.map(tx => {
-                    const date = moment(tx.block_timestamp).format('YYYY-MM-DD');
+                    const date = moment(tx.block_timestamp).format('YYYY-MM-DD HH:mm:ss');
                     const amount = tx.value / (10 ** 6);
                     return {
                         date: date,
