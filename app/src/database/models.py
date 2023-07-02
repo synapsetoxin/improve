@@ -156,8 +156,12 @@ class Wallets(List[Wallet]):
 
     def add(self, wallet: Wallet):
         self.append(wallet)
-        sql = 'INSERT INTO wallets (address, name) VALUES (?, ?);'
-        self.__db.execute(sql, [wallet.address, wallet.name], commit=True)
+        try:
+            sql = 'INSERT INTO wallets (address, name) VALUES (?, ?);'
+            self.__db.execute(sql, [wallet.address, wallet.name], commit=True)
+        except sqlite3.IntegrityError:
+            sql = 'UPDATE wallets SET name = ? WHERE address = ?'
+            self.__db.execute(sql, [wallet.name, wallet.address], commit=True)
 
     def remove(self, wallet: Wallet):
         self.remove(wallet)
