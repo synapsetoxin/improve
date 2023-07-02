@@ -1,6 +1,6 @@
 discord:
   bot:
-    token: ODcwMDUxNzMyNjI4MDc4NjYy.G3-Lxr.rHCTdX_Bvw9JYeYtB4ZQgMv-B6yO3NMCSnxQd4
+    token: ODcwMDUxNzMyNjI4MDc4NjYy.GgIuh_.TfJZh3XxxSBs-Bsy_KrtBnEpIg5l535AoCfa-w
   server:
     channels:
       statistics:
@@ -8,3 +8,8 @@ discord:
         voice: null
       door: null  # welcome channel
       create_voice: null
+      deposit: 1113420310784516108
+  gif:
+    deposit: "https://media.discordapp.net/attachments/506411735943479297/950059862467940442/gifntext-gif_1.gif"
+tronscan:
+  delay: 60  # in seconds

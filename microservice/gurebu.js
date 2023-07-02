@@ -9,7 +9,7 @@ const app = express();
 app.get('/fetch-transactions/:walletAddress', (req, res) => {
     const walletAddress = req.params.walletAddress;
     const now = moment();
-    const time = now.clone().subtract(5, 'minutes');
+    const time = now.clone().subtract(5, 'minutes'); // Take the value from app/configs/config -> tronscan/delay
 
     const fetchTransactions = (url, direction) => {
         return axios.get(url)
@@ -30,10 +30,7 @@ app.get('/fetch-transactions/:walletAddress', (req, res) => {
     const outgoingUrl = `https://api.trongrid.io/v1/accounts/${walletAddress}/transactions/trc20?only_to=false&contract_address=${contractAddress}&min_timestamp=${time.valueOf()}&only_from=true`;
     const incomingUrl = `https://api.trongrid.io/v1/accounts/${walletAddress}/transactions/trc20?only_to=true&contract_address=${contractAddress}&min_timestamp=${time.valueOf()}`;
 
-    Promise.all([
-        fetchTransactions(outgoingUrl, 'out'),
-        fetchTransactions(incomingUrl, 'in')
-    ])
+    Promise.all([ fetchTransactions(incomingUrl, 'in') ])
     .then(results => {
         const transactions = [].concat(...results);
         res.json(transactions);

@@ -5,3 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
     dotaid    INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS wallets (
+    address TEXT UNIQUE,
+    name    TEXT
+);

@@ -3,7 +3,7 @@ import sqlite3
 import logging
 import datetime
 
-from typing import Any, Optional, List, Tuple
+from typing import Any, Optional, List, Tuple, Dict
 from dataclasses import dataclass, field
 
 
@@ -68,9 +68,9 @@ class User:
     def __post_init__(self):
         db = Database()
         try:
-            utcnow = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
-            sql = 'INSERT INTO users (userid, join_date) VALUES (?, ?);'
-            db.execute(sql, [self.userid, utcnow], commit=True)
+            # utcnow = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+            sql = 'INSERT INTO users (userid) VALUES (?);'
+            db.execute(sql, [self.userid], commit=True)
         except sqlite3.IntegrityError:
             pass
         finally:
@@ -79,13 +79,9 @@ class User:
             fill = iter(db.execute(sql, [self.userid], fetchall=True)[0])
             for attr in self.__dict__:
                 setattr(self, attr, next(fill))
-            if self.locations:
-                self.locations = self.locations.split('&')
 
     def __del__(self):
         db = Database()
-        if self.locations:
-            self.locations = '&'.join(self.locations)
         keys = ','.join(f'{k}=?' for k in self.__dict__)
         sql = f'UPDATE users SET {keys} WHERE userid = ?'
         # self.premium_expire = self.premium_expire.strftime("%Y-%m-%dT%H:%M:%S")
@@ -134,7 +130,36 @@ class ShopRole:
 
 
 @dataclass
-class Shop:
-    roles: List[ShopRole]
+class Shop(List[ShopRole]):
+    pass
 
 
+@dataclass
+class Wallet:
+    address: str
+    name: str = field(default=None)
+
+    def __post_init__(self):
+        if type(self.address) == tuple:
+            self.name = self.address[1]
+            self.address = self.address[0]
+
+
+@dataclass
+class Wallets(List[Wallet]):
+    __db = Database()
+
+    def __post_init__(self):
+        sql = 'SELECT address, name FROM wallets;'
+        wallets = self.__db.execute(sql, fetchall=True)
+        self.extend(list(map(Wallet, wallets)))
+
+    def add(self, wallet: Wallet):
+        self.append(wallet)
+        sql = 'INSERT INTO wallets (address, name) VALUES (?, ?);'
+        self.__db.execute(sql, [wallet.address, wallet.name], commit=True)
+
+    def remove(self, wallet: Wallet):
+        self.remove(wallet)
+        sql = 'DELETE FROM wallets WHERE address = ?;'
+        self.__db.execute(sql, [wallet.address], commit=True)
