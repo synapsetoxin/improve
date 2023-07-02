@@ -9,7 +9,7 @@ const app = express();
 app.get('/fetch-transactions/:walletAddress', (req, res) => {
     const walletAddress = req.params.walletAddress;
     const now = moment();
-    const time = now.clone().subtract(100, 'days');
+    const time = now.clone().subtract(5, 'minutes');
 
     const fetchTransactions = (url, direction) => {
         return axios.get(url)
