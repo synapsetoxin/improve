@@ -1,14 +1,14 @@
 import asyncio
 
-from app.src.loader import bot, BOT_TOKEN
 from discord.ext.commands import Bot
 
-from app.src.bot.commands.user.test import ping
+from app.src.loader import bot, BOT_TOKEN
+from app.src.bot.commands import all_commands
 
 
 async def build(app: Bot):
     app.remove_command('help')
-    app.add_command(ping)
+    all_commands(app)
     await app.start(BOT_TOKEN)
 
 

@@ -42,6 +42,7 @@ from discord.ext import commands
 
 """
 
+
 @commands.command(name='shop')
 async def shop(ctx):
     """
@@ -214,5 +215,5 @@ async def shop(ctx):
     :return:
     """
     await ctx.message.delete()
-    embed = discord.Embed(title="pong")
+    embed = discord.Embed(title="Не реализовано")
     await ctx.send(embed=embed)

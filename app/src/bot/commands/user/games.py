@@ -1,11 +1,15 @@
 import discord
 from discord.ext import commands
 
+from app.src.database.models import User
+
 
 @commands.command(name='duel')
-async def duel(ctx):
+async def duel(ctx, cost: int):
+    # todo: Сделать чтобы по реакции работало
     await ctx.message.delete()
-    if db.get_souls(ctx.message.author.id) >= cost and cost >= 1:
+    user = User(ctx.message.author.id)
+    if user.balance >= cost >= 1:
         embed = discord.Embed(
             title='Дуэль',
             description=f'Вызвал: {ctx.author.mention}\nСтоимость: `{cost} SOULS`',
@@ -15,7 +19,5 @@ async def duel(ctx):
         message = await ctx.send(embed=embed)
 
         await message.add_reaction(emoji='🎲')
-
-
     else:
         await ctx.send(f'{ctx.message.author.mention}, недостаточно средств!')

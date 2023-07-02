@@ -63,7 +63,7 @@ class User:
     username: str = field(default=None)
     balance: float = field(default=0.0)
     dotaid: Optional[int] = field(default=None)
-    join_date: datetime = field(default=None)
+    created_at: datetime = field(default=None)
 
     def __post_init__(self):
         db = Database()

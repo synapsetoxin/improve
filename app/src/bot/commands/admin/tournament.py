@@ -15,7 +15,7 @@ async def create_tournament(ctx):
     :return:
     """
     await ctx.message.delete()
-    embed = discord.Embed(title="pong")
+    embed = discord.Embed(title="Не реализовано")
     await ctx.send(embed=embed)
 
 
@@ -27,29 +27,29 @@ async def remove_tournament(ctx):
     :param ctx:
     :return:
     """
-    role = discord.utils.get(ctx.message.author.guild.roles,
-                             id=ROLES['zxcmember'])
-    for member in role.members:
-        await member.remove_roles(role)
+    # role = discord.utils.get(ctx.message.author.guild.roles,
+    #                          id=ROLES['zxcmember'])
+    # for member in role.members:
+    #     await member.remove_roles(role)
     await ctx.message.delete()
-    embed = discord.Embed(title="pong")
+    embed = discord.Embed(title="Не реализовано")
     await ctx.send(embed=embed)
 
 
-@commands.command(name='rt')
+@commands.command(name='cancel_tournament')
 @commands.has_permissions(administrator=True)
-async def remove_tournament(ctx):
+async def cancel_tournament(ctx):
     """
-    Remove tournament
+    Cancel tournament
     :param ctx:
     :return:
     """
-    role = discord.utils.get(ctx.message.author.guild.roles,
-                             id=ROLES['zxcmember'])
-    for member in role.members:
-        await member.remove_roles(role)
+    # role = discord.utils.get(ctx.message.author.guild.roles,
+    #                          id=ROLES['zxcmember'])
+    # for member in role.members:
+    #     await member.remove_roles(role)
     await ctx.message.delete()
-    embed = discord.Embed(title="pong")
+    embed = discord.Embed(title="Не реализовано")
     await ctx.send(embed=embed)
 
 
@@ -62,5 +62,5 @@ async def reglist(ctx):
     :return:
     """
     await ctx.message.delete()
-    embed = discord.Embed(title="pong")
+    embed = discord.Embed(title="Не реализовано")
     await ctx.send(embed=embed)
