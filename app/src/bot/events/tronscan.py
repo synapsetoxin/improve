@@ -28,5 +28,5 @@ async def on_ready():
                 everyone = '@everyone @everyone @everyone'  # todo: make in yaml
                 allowed_mentions = discord.AllowedMentions(everyone=True)
                 # await channel.send(everyone, allowed_mentions=allowed_mentions)
-                # await channel.send(embed=embed)
+                await channel.send(embed=embed)
         await asyncio.sleep(config['tronscan']['delay'])
