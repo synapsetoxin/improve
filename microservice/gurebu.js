@@ -2,14 +2,14 @@ import axios from 'axios';
 import moment from 'moment';
 import express from 'express';
 
-const walletAddress = 'TPjereztht2j6Ffq3vGyMGwvNvKErVNYuv';
 const contractAddress = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 
 const app = express();
 
-app.get('/fetch-transactions', (req, res) => {
+app.get('/fetch-transactions/:walletAddress', (req, res) => {
+    const walletAddress = req.params.walletAddress;
     const now = moment();
-    const time = now.clone().subtract(5, 'minutes');
+    const time = now.clone().subtract(100, 'days');
 
     const fetchTransactions = (url, direction) => {
         return axios.get(url)
