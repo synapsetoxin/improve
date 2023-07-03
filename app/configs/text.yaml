@@ -1,3 +1,15 @@
+wallet:
+  list: "Кошельки:"
+  help: "/wallet <command> <address> <name>\nДействия:\nadd <a> <n> - Добавить новый кошелек\nrename <a> <n> - Переименовать кошелек\nremove <a> - удалить кошелек\nlist - список кошельков"
+
+tronscan:
+  everyone: "@everyone @everyone @everyone"
+  alert: "ДЕПОЗИТ ОТ {name} НА {amount}$"
+
+tournament:
+  reg:
+    error: "Не выставлен DotaID.\n/dotaid 1357924680"
+
 help: "```!помощь - Команды бота.```\n
 ```!инфо optional:user - Информация о пользователе.```\n
 ```!дота id - Обновить свой dota id.```\n
@@ -36,19 +48,6 @@ specify_user: "Укажите пользователя"
 
 infinite_voice_mute_alert: "Пользователь {user} был замучен в голосовом чате на неопределенный срок админом {admin}.
 Причина: {reason}"
-
-voice_mute_alert: "Пользователь {user} был замучен в голосовом чате на {time} минут админом {admin}\nПричина: {reason}"
-
-voice_unmute_alert: "Пользователь {user} был размучен в голосовом чате!"
-
-infinite_chat_mute_alert: "Пользователь {user} был замучен в текстовом чате на неопределенный срок админом {admin}.
-Причина: {reason}"
-
-chat_mute_alert: "Пользователь {user} был замучен в текстовом чате на {time} минут админом {admin}\nПричина: {reason}"
-
-chat_unmute_alert: "Пользователь {user} был размучен в текстовом чате!"
-
-unmute_alert: "Пользователь {user} был размучен {admin}"
 
 role_shop_help: "**Стоимость:**
 \n

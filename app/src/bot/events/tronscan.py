@@ -2,13 +2,10 @@ import asyncio
 import discord
 
 from discord.ext import commands
-from typing import List
 
-from app.src.loader import bot, config
-from app.src.database.models import Wallet, Wallets
-
-from microservice.methods import fetch
-from microservice.models import Transactions
+from app.src.loader import bot, config, text
+from app.src.database.models import Wallets
+from app.src.tronscan.methods import fetch
 
 
 @commands.Cog.listener()
@@ -17,16 +14,16 @@ async def on_ready():
     channel = bot.get_channel(channel_id)
 
     while True:
-        wallets: List[Wallet] = Wallets()
-        for wallet in wallets:
-            transactions: Transactions = fetch(wallet)
-            for transaction in transactions:
-                gif: str = config['discord']['gif']['deposit']
-                title = f'ДЕПОЗИТ ОТ {wallet.name.upper()} НА {transaction.amount}$'  # todo: make in yaml
+        for wallet in Wallets():
+            for transaction in fetch(wallet):
+                title = text['tronscan']['alert'].format(
+                    name=wallet.name.upper(), amount=transaction.amount)
                 embed = discord.Embed(title=title)
-                embed.set_image(url=gif)
-                everyone = '@everyone @everyone @everyone'  # todo: make in yaml
+                embed.set_image(url=config['discord']['gif']['deposit'])
+
                 allowed_mentions = discord.AllowedMentions(everyone=True)
-                # await channel.send(everyone, allowed_mentions=allowed_mentions)
+                await channel.send(text['tronscan']['everyone'],
+                                   allowed_mentions=allowed_mentions)
                 await channel.send(embed=embed)
+
         await asyncio.sleep(config['tronscan']['delay'])

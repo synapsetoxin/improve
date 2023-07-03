@@ -2,13 +2,21 @@ import discord
 
 from discord.ext import commands
 
+from app.src.database.models import User
+from app.src.loader import text, config
+
 
 @commands.command(name='reg')
 async def reg(ctx):
     # todo: Выдавать роль zxc
-    # todo: Проверять наличие dotaid
     # todo: Проверять балик
     await ctx.message.delete()
+    user = User(ctx.message.author.id)
+    role = None  # config['discord']['server']['role']['zxc']
+    if user.dotaid:
+        pass
+    else:
+        await ctx.send(text['tournament']['reg']['error'])
     embed = discord.Embed(title="Не реализовано")
     # embed.set_thumbnail(url=ctx.message.author.avatar_url)
     await ctx.send(embed=embed)

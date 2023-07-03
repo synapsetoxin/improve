@@ -1,15 +1,18 @@
 discord:
   bot:
-    token: ODcwMDUxNzMyNjI4MDc4NjYy.GgIuh_.TfJZh3XxxSBs-Bsy_KrtBnEpIg5l535AoCfa-w
+    token: null  # set in env
   server:
     channels:
       statistics:
         members: null
         voice: null
-      door: null  # welcome channel
+      door: null  # welcome channels
       create_voice: null
       deposit: 1113420310784516108
+    roles:
+      zxc: null
   gif:
     deposit: "https://media.discordapp.net/attachments/506411735943479297/950059862467940442/gifntext-gif_1.gif"
+
 tronscan:
-  delay: 60  # in seconds
+  delay: 300  # in seconds

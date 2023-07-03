@@ -3,7 +3,7 @@ import sqlite3
 import logging
 import datetime
 
-from typing import Any, Optional, List, Tuple, Dict
+from typing import Any, Optional, List, Tuple
 from dataclasses import dataclass, field
 
 
@@ -84,7 +84,6 @@ class User:
         db = Database()
         keys = ','.join(f'{k}=?' for k in self.__dict__)
         sql = f'UPDATE users SET {keys} WHERE userid = ?'
-        # self.premium_expire = self.premium_expire.strftime("%Y-%m-%dT%H:%M:%S")
         db.execute(sql, [*self.__dict__.values(), self.userid], commit=True)
 
     def send_money(self, amount: float) -> None:
@@ -109,7 +108,6 @@ class Tournament:
         =====zxc eblany:=====
         :return:
         """
-        # todo: rename
         pass
 
 
